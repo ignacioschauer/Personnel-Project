@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.79.0">
+
+    <title>Personnel Database</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/offcanvas/">
+
+    <!-- Bootstrap core CSS -->
+
+    <link href="vendors/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="css/index.css" rel="stylesheet">
+
+    <link href="vendors/Bootstrap/css/signin.css" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link href="vendors/Bootstrap/css/offcanvas.css" rel="stylesheet">
+  </head>
+  <body class="bg-light">
+    
+<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Personnel Database</a>
+    <button class="navbar-toggler p-0 border-0" type="button" data-bs-toggle="offcanvas" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 navRight">
+          <a class="nav-link nav-item dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Login</a>
+          <ul class="dropdown-menu" aria-labelledby="dropdown01">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="nav-scroller bg-white shadow-sm">
+  <nav class="nav nav-underline navDiv" aria-label="Secondary navigation">
+    <form class="d-flex formWidth">
+      <input class="form-control me-2 search-position" type="search" placeholder="Search Employee" aria-label="Search">
+      <button class="btn btn-outline-success btn-size left" type="submit"><img id="loupeHeight" src="images/Loupe.svg"></button>
+    </form>
+    <button class="btn btn-outline-success btn-size center" id="editButton" href="#">Edit</button>
+    <button class="btn btn-outline-success btn-size center" id="deleteButton" href="#">Delete</button>
+    <button class="btn btn-outline-success btn-size center" id="addButton" href="#">Add</button>
+    <div class="right"></div>
+    <div class="right"></div>
+    <form class="right" id="navSort">
+      <select class="form-control mr-sm-2" type="text" aria-label="Search" name ="countrySelect" id="countrySelect"> Sort Table By:
+        <option value="Sort Table By:">Sort Table By:</option>
+        <option value="Name">Name</option>
+        <option value="Department">Department</option>
+        <option value="Location">Location</option>
+        <option value="Age">Age</option>
+      </select>
+    </form>
+    <form class="right" id="navSort">
+      <select class="form-control mr-sm-2" type="text" aria-label="Search" name ="countrySelect" id="countrySelect"> Sort Table By:
+        <option value="Descending">Ascending</option>
+        <option value="Descending">Descending</option>
+      </select>
+    </form>
+  </nav>
+</div>
+
+<main class="container">
+
+  <!--<div class="my-3 p-3 bg-white rounded shadow-sm">
+    
+    <div class="d-flex text-muted pt-3">
+      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
+
+      <p class="pb-3 mb-0 small lh-sm" >
+        <strong class="d-block text-gray-dark">@username</strong>
+        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+      </p>
+    </div>
+  </div>-->
+
+  <div class='margin p-3 bg-white rounded shadow-sm'>
+    <div class='d-flex text-muted pt-3'>
+      <table id="employeeList">
+        <tr>
+          <td class="firstTd"><input type='checkbox' class='checkbox'></td>
+          <td class="firstTd">ID</td>
+          <td class="secondTd">First Name</td>
+          <td class="secondTd">Last Name</td>
+          <td>Job Title</td>
+          <td class="thirdTd">Email Address</Address></td>
+          <td class="secondTd">Department ID</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+
+    <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header modalColor">
+            <h5 class="modal-title" id="exampleModalLabel"><span id="countryName"></span></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" class="modalColor">&times;</span>
+            </button>
+          </div>
+          <div class="form-signin">
+            <form>
+              <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+              <!--<label for="inputEmail" class="visually-hidden">Email address</label>-->
+              <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+              <!--<label for="inputPassword" class="visually-hidden"></label>-->
+              <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+              <div class="checkbox mb-3">
+                <label>
+                  <input type="checkbox" value="remember-me"> Remember me
+                </label>
+                <br>
+                <a style="size: 0.3em" href="/forgottenPassword">Forgot password?</a>
+              </div>
+              <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+            </form>            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="closeModal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal2" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header modalColor">
+            <h5 class="modal-title" id="exampleModalLabel2"><span id="countryName2"></span></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" class="modalColor">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">      
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="closeModal2">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal3" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header modalColor">
+            <h5 class="modal-title" id="exampleModalLabel3"><span id="countryName3"></span></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" class="modalColor">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="closeModal3">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+</main>
+
+    <script src="js/jquery-2.2.3.min.js"></script>
+    <script src="vendors/Bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendors/Bootstrap/js/offcanvas.js"></script>
+    <script src="js/script.js"></script>
+
+  </body>
+</html>
