@@ -72,8 +72,8 @@
     <button class="btn btn-outline-success btn-size center" id="addButton" href="#">Add</button>
     <div class="right"></div>
     <div class="right"></div>
-    <form class="right" id="navSort">
-      <select class="form-control mr-sm-2" type="text" aria-label="Search" name ="countrySelect" id="countrySelect"> Sort Table By:
+    <form class="right">
+      <select class="form-control mr-sm-2" type="text" aria-label="Search" name ="">
         <option value="Sort Table By:">Sort Table By:</option>
         <option value="Name">Name</option>
         <option value="Department">Department</option>
@@ -81,8 +81,8 @@
         <option value="Age">Age</option>
       </select>
     </form>
-    <form class="right" id="navSort">
-      <select class="form-control mr-sm-2" type="text" aria-label="Search" name ="countrySelect" id="countrySelect"> Sort Table By:
+    <form class="right">
+      <select class="form-control mr-sm-2" type="text" aria-label="Search" name ="" id=""> Sort Table By:
         <option value="Descending">Ascending</option>
         <option value="Descending">Descending</option>
       </select>
@@ -120,7 +120,6 @@
     </div>
   </div>
 
-
     <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
@@ -154,40 +153,134 @@
       </div>
     </div>
 
-    <div class="modal2" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header modalColor">
-            <h5 class="modal-title" id="exampleModalLabel2"><span id="countryName2"></span></h5>
+            <h5 class="modal-title" id="exampleModalLabel"><span id="editHeader">Add New Employee</span></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true" class="modalColor">&times;</span>
             </button>
           </div>
           <div class="modal-body">      
-
+            <form class="form-horizontal" action="/action_page.php">
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="id">Id:</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control newForm" id="id" placeholder="Enter Id" name="id">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="firstName">First Name:</label>
+                <div class="col-sm-10">          
+                  <input type="text" class="form-control newForm" id="firstName" placeholder="Enter First Name" name="firstName">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="lastName">Last Name:</label>
+                <div class="col-sm-10">          
+                  <input type="text" class="form-control newForm" id="lastName" placeholder="Enter Last Name" name="lastName">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="jobTitle">Job Title:</label>
+                <div class="col-sm-10">          
+                  <input type="text" class="form-control newForm" id="jobTitle" placeholder="Enter Job Title" name="jobTitle">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="email">Email:</label>
+                <div class="col-sm-10">          
+                  <input type="email" class="form-control newForm" id="email" placeholder="Enter Email" name="email">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="departmentId" style="display:inline-block;">Department ID:</label>
+                <div class="col-sm-10">          
+                  <input type="text" class="form-control newForm" id="departmentId" placeholder="Enter Department ID" name="departmentId">
+                </div>
+              </div>
+            </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" id="closeModal2">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="closeModal2">Submit</button>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="modal3" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
           <div class="modal-header modalColor">
-            <h5 class="modal-title" id="exampleModalLabel3"><span id="countryName3"></span></h5>
+            <h5 class="modal-title" id="exampleModalLabel"><span id="editHeader">Edit Employee</span></h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true" class="modalColor">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            
-            
+              <form class="form-horizontal" action="/action_page.php">
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="id">Id:</label>
+                  <div class="col-sm-10">
+                    
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="firstName">First Name:</label>
+                  <div class="col-sm-10">          
+                    
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="lastName">Last Name:</label>
+                  <div class="col-sm-10">          
+                  
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="jobTitle">Job Title:</label>
+                  <div class="col-sm-10">          
+                  
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="email">Email:</label>
+                  <div class="col-sm-10">          
+                  
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="departmentId" style="display:inline-block;">Department ID:</label>
+                  <div class="col-sm-10">          
+                  
+                  </div>
+                </div>
+              </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" id="closeModal3">Close</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="closeModal3">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header modalColor">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          </div>
+          <div class="modal-body">
+            <div>
+              <img src="images/cancel.svg" class="icon-box">
+            </div>						
+            <h4 class="modal-title w-100">Are you sure?</h4>	
+            <p class="gray">Do you really want to delete these records?<br>This process cannot be undone.</p>
+			    </div>
+			    <div class="modal-footer justify-content-center">
+				    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModal4">Cancel</button>
+				    <button type="button" class="btn btn-danger" id="confirmDeletion">Delete</button>  
           </div>
         </div>
       </div>
@@ -197,6 +290,8 @@
 
     <script src="js/jquery-2.2.3.min.js"></script>
     <script src="vendors/Bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="vendors/Bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendors/Bootstrap/js/popper.min.js"></script>
     <script src="vendors/Bootstrap/js/offcanvas.js"></script>
     <script src="js/script.js"></script>
 
