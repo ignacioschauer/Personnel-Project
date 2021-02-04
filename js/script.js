@@ -6,6 +6,8 @@ var modalTwo = document.getElementById("exampleModal2");
 
 var modalThree = document.getElementById("exampleModal3");
 
+var modalFour = document.getElementById("exampleModal4");
+
 // Get the button that opens the modal
 
 var easyOne = document.getElementById("dropdown01");
@@ -24,6 +26,8 @@ var btnTwo = document.getElementsByClassName("close")[1];
 
 var btnThree = document.getElementsByClassName("close")[2];
 
+var btnFour = document.getElementsByClassName("close")[3];
+
 // Get the <close> button that closes the modal
 
 var closeFirst = document.getElementById("closeModal");
@@ -32,16 +36,22 @@ var closeSecond = document.getElementById("closeModal2");
 
 var closeThird = document.getElementById("closeModal3");
 
+var closeFourth = document.getElementById("closeModal4");
+
 // When the user clicks on the button, open the modal
 
 easyOne.onclick = function() {
   modal.style.display = "block";
   modalTwo.style.display = "none";
+  modalThree.style.display = "none";
+  modalFour.style.display = "none";
 }
 
 easyTwo.onclick = function() {
   modalTwo.style.display = "block";
   modal.style.display = "none";
+  modalThree.style.display = "none";
+  modalFour.style.display = "none";
 }
 
 easyThree.onclick = function() {
@@ -49,6 +59,13 @@ easyThree.onclick = function() {
   modalTwo.style.display = "none";
   modal.style.display = "none";
   modalFour.style.display = "none";
+}
+
+easyFour.onclick = function() {
+  modalFour.style.display = "block";
+  modalThree.style.display = "none";
+  modalTwo.style.display = "none";
+  modal.style.display = "none";
 }
 
 // When the user clicks on <span> (x), close the modal
@@ -65,6 +82,10 @@ btnThree.onclick = function() {
   modalThree.style.display = "none";
 }
 
+btnFour.onclick = function() {
+  modalFour.style.display = "none";
+}
+
 closeFirst.onclick = function() {
   modal.style.display = "none";
 }
@@ -77,6 +98,10 @@ closeThird.onclick = function() {
   modalThree.style.display = "none";
 }
 
+closeFourth.onclick = function() {
+  modalFour.style.display = "none";
+}
+
 // When the user clicks anywhere outside of the modal, close it
 
 window.onclick = function(event) {
@@ -86,6 +111,8 @@ window.onclick = function(event) {
     modalTwo.style.display = "none"
   } else if (event.target == modalThree) {
     modalThree.style.display = "none"
+  } else if (event.target == modalFour) {
+    modalFour.style.display = "none"
   }
 }
 
@@ -93,15 +120,13 @@ window.onclick = function(event) {
 
 //$.each(result.data.country, function(index) {
 
-easyTwo.onclick = function() {
+$(document).ready(function () {
 
   var employees;
 
-  //alert("Funciona el boton!!");
-
   employees = "<li>Ignacio Schauer</li>";
 
-$('#employeeList').append(
+  $('#employeeList').append(
                                               
   $("<tr>" +
         "<td class='firstTd'><input type='checkbox' class='checkbox'></td>" +
@@ -109,10 +134,66 @@ $('#employeeList').append(
         "<td class='secondTd'>Ignacio</td>" +
         "<td class='secondTd'>Schauer</td>" +
         "<td>Software Developer</td>" +
-        "<td>schauer.ignacio@gmail.com.makingitlongetoseehowitlooks</td>" +
+        "<td>schauer.ignacio@gmail.com.makingitlongertoseehowitlooks</td>" +
+        "<td class='secondTd'>5</td>" +
+    "</tr>" + 
+    "<tr>" +
+        "<td class='firstTd'><input type='checkbox' class='checkbox'></td>" +
+        "<td class='firstTd'>154</td>" +
+        "<td class='secondTd'>Ignacio</td>" +
+        "<td class='secondTd'>Schauer</td>" +
+        "<td>Software Developer</td>" +
+        "<td>schauer.ignacio@gmail.com.makingitlongertoseehowitlooks</td>" +
         "<td class='secondTd'>5</td>" +
     "</tr>")
-);
-                           
- // $('#employeeList').html(employees)
-  }
+  );
+
+});
+
+// Delete Row 
+
+/*var confirmDelete = document.getElementById("confirmDeletion");
+
+function deleteRow() {
+  document.querySelectorAll('#employeeList .checkbox:checked').forEach(e => {
+    e.parentNode.parentNode.remove()
+  });
+}
+
+confirmDelete.onclick = deleteRow ();*/
+
+$('#confirmDeletion').click(function(){
+  $('.checkbox:checked').each(function(){
+    $(this).parent('tr').remove();
+  });
+});
+
+
+
+$('#addButton').click(function(){
+
+$.ajax ({
+  url: 'php/getPersonnel.php',
+  type: 'POST',
+  dataType: 'json',
+  data: {
+    id : 1
+  },
+  success: function (result) {
+
+    console.log(result) 
+
+      if (result.status.name == "ok") {
+
+      
+      alert("PHP is working!");                    
+
+        };          
+      } 
+    });
+
+  });
+
+
+
+  
