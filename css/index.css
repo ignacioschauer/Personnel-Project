@@ -110,5 +110,80 @@ td {
     overflow: hidden;
 }
 
+.icon-box {
+	width: 80px;
+    height: 80px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2%;
+	z-index: 9;
+    text-align: center;
+}
 
+.modal-confirm .btn, .modal-confirm .btn:active {
+	color: #fff;
+	border-radius: 4px;
+	background: #60c7c1;
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	min-width: 120px;
+	border: none;
+	min-height: 40px;
+	border-radius: 3px;
+	margin: 0 5px;
+}
+.btn-secondary {
+    background: #c1c1c1;
+    width:25%;
+}
+.btn-secondary:hover, .btn-secondary:focus {
+	background: #a8a8a8;
+}
+.btn-danger {
+    background: #f15e5e;
+    width:25%;
+}
+.btn-danger:hover, .btn-danger:focus {
+	background: #ee3535;
+}
+.trigger-btn {
+	display: inline-block;
+	margin: 100px auto;
+}
 
+h4 {
+	text-align: center;
+	font-size: 26px;
+    margin-top: 5%;
+}
+
+.gray {
+    margin-top:5%;
+    color: #8e8e8e;
+    text-align: center;
+}
+
+.form-group label {
+    display:inline;
+    width: 30%;
+    vertical-align: middle;
+
+}
+
+.form-group div {
+    display:inline;
+}
+
+.newForm {
+    width: 60%;
+    display: inline;
+    float: right;
+}
+
+#editHeader {
+    padding-left: 7%;
+    display: inline-block;
+    width: 200px;
+}
