@@ -34,7 +34,7 @@
 
 	// first query
 
-	$query = 'SELECT * from personnel WHERE id =' . $_REQUEST['id'];
+	$query = 'SELECT * from personnel WHERE id =' . $_POST['id'];
 
 	$result = $conn->query($query);
 	
