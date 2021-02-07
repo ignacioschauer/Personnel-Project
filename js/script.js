@@ -122,32 +122,39 @@ window.onclick = function(event) {
 
 $(document).ready(function () {
 
-  var employees;
-
-  employees = "<li>Ignacio Schauer</li>";
-
-  $('#employeeList').append(
-                                              
-  $("<tr>" +
-        "<td class='firstTd'><input type='checkbox' class='checkbox'></td>" +
-        "<td class='firstTd'>154</td>" +
-        "<td class='secondTd'>Ignacio</td>" +
-        "<td class='secondTd'>Schauer</td>" +
-        "<td>Software Developer</td>" +
-        "<td>schauer.ignacio@gmail.com.makingitlongertoseehowitlooks</td>" +
-        "<td class='secondTd'>5</td>" +
-    "</tr>" + 
-    "<tr>" +
-        "<td class='firstTd'><input type='checkbox' class='checkbox'></td>" +
-        "<td class='firstTd'>154</td>" +
-        "<td class='secondTd'>Ignacio</td>" +
-        "<td class='secondTd'>Schauer</td>" +
-        "<td>Software Developer</td>" +
-        "<td>schauer.ignacio@gmail.com.makingitlongertoseehowitlooks</td>" +
-        "<td class='secondTd'>5</td>" +
-    "</tr>")
-  );
-
+  $.ajax ({
+    url: 'php/getAll.php',
+    type: 'POST',
+    dataType: 'json',
+    data: {
+      id : 1
+    },
+    success: function (result) {
+  
+      console.log(result.data) 
+  
+        if (result.status.name == "ok") {
+  
+        
+        $.each(result.data, function(index) {
+                             
+          $('#employeeList').append(
+  
+            $("<tr>" +
+            "<td class='firstTd'><input type='checkbox' class='checkbox'></td>" +
+            "<td class='firstTd'>" + result.data[index].id + "</td>" +
+            "<td class='secondTd'>" + result.data[index].firstName + "</td>" +
+            "<td class='secondTd'>" + result.data[index].lastName + "</td>" +
+            "<td>" + result.data[index].jobTitle + "</td>" +
+            "<td>" + result.data[index].email + "</td>" +
+            "<td class='secondTd'>" + result.data[index].departmentId + "</td>" +
+            "</tr>"
+                
+          ));
+        });                    
+      };          
+    } 
+  });
 });
 
 // Delete Row 
@@ -168,32 +175,38 @@ $('#confirmDeletion').click(function(){
   });
 });
 
+ 
+/*$('#closeModal2').click(function(){
 
+  $.ajax ({
+    url: 'php/addPersonnel.php',
+    type: 'POST',
+    dataType: 'json',
+    data: {
+      firstName: $('#firstName').val(),
+      lastName: $('#lastName').val(),
+      jobTitle: $('#jobTitle').val(),
+      email: $('#email').val(), 
+      departmentId: $('#departmentId').val(),
+    },
+    success: function (result) {
+  
+      console.log(result);
 
-$('#addButton').click(function(){
+      alert("add Personnel php is working")
 
-$.ajax ({
-  url: 'php/getPersonnel.php',
-  type: 'POST',
-  dataType: 'json',
-  data: {
-    id : 1
-  },
-  success: function (result) {
-
-    console.log(result) 
-
-      if (result.status.name == "ok") {
-
-      
-      alert("PHP is working!");                    
-
-        };          
-      } 
-    });
-
+    }
   });
+})*/
 
+$('#closeModal2').click(function(){
 
+      function clearInput() {
+      $("#myForm :input").each ( function() {
+        $(this).val('');
+      })
+      };
 
+      clearInput();
+});
   
