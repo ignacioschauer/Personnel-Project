@@ -19,24 +19,10 @@
 
     <link href="vendors/Bootstrap/css/signin.css" rel="stylesheet">
 
-    <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style>
-
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" /> 
+       
     <!-- Custom styles for this template -->
+    
     <link href="vendors/Bootstrap/css/offcanvas.css" rel="stylesheet">
   </head>
   <body class="bg-light">
@@ -60,234 +46,223 @@
     </div>
   </div>
 </nav>
-
-<div class="nav-scroller bg-white shadow-sm">
-  <nav class="nav nav-underline navDiv" aria-label="Secondary navigation">
-    <form class="d-flex formWidth">
-      <input class="form-control me-2 search-position" type="search" placeholder="Search Employee" aria-label="Search">
-      <button class="btn btn-outline-success btn-size left" type="submit"><img id="loupeHeight" src="images/Loupe.svg"></button>
-    </form>
-    <button class="btn btn-outline-success btn-size center" id="editButton" href="#">Edit</button>
-    <button class="btn btn-outline-success btn-size center" id="deleteButton" href="#">Delete</button>
-    <button class="btn btn-outline-success btn-size center" id="addButton" href="#">Add</button>
-    <div class="right"></div>
-    <div class="right"></div>
-    <form class="right">
-      <select class="form-control mr-sm-2" type="text" aria-label="Search" name ="">
-        <option value="Sort Table By:">Sort Table By:</option>
-        <option value="Name">Name</option>
-        <option value="Department">Department</option>
-        <option value="Location">Location</option>
-        <option value="Age">Age</option>
-      </select>
-    </form>
-    <form class="right">
-      <select class="form-control mr-sm-2" type="text" aria-label="Search" name ="" id=""> Sort Table By:
-        <option value="Descending">Ascending</option>
-        <option value="Descending">Descending</option>
-      </select>
-    </form>
-  </nav>
-</div>
-
-<main class="container">
-
-  <!--<div class="my-3 p-3 bg-white rounded shadow-sm">
-    
-    <div class="d-flex text-muted pt-3">
-      <svg class="bd-placeholder-img flex-shrink-0 me-2 rounded" width="32" height="32" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 32x32" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#007bff"/><text x="50%" y="50%" fill="#007bff" dy=".3em">32x32</text></svg>
-
-      <p class="pb-3 mb-0 small lh-sm" >
-        <strong class="d-block text-gray-dark">@username</strong>
-        Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-      </p>
-    </div>
-  </div>-->
-
-  <div class='margin p-3 bg-white rounded shadow-sm'>
-    <div class='d-flex text-muted pt-3'>
-      <table id="employeeList">
-        <tr>
-          <td class="firstTd"><input type='checkbox' class='checkbox'></td>
-          <td class="firstTd">ID</td>
-          <td class="secondTd">First Name</td>
-          <td class="secondTd">Last Name</td>
-          <td>Job Title</td>
-          <td class="thirdTd">Email Address</Address></td>
-          <td class="secondTd">Department ID</td>
-        </tr>
-      </table>
-    </div>
+<div class="main_container">
+  <div class="nav-scroller bg-white shadow-sm">
+    <nav class="nav nav-underline navDiv" aria-label="Secondary navigation">
+      <form class="d-flex formWidth">
+        <input class="form-control me-2 search-position" type="search" id="search"  placeholder="Search Employee" aria-label="Search">
+        <button class="btn btn-outline-success btn-size left" type="submit"><img id="loupeHeight" src="images/Loupe.svg"></button>
+      </form>
+      <button class="btn btn-outline-success btn-size center" id="editButton" disabled href="#">Edit</button>
+      <button class="btn btn-outline-success btn-size center" id="deleteButton" href="#">Delete</button>
+      <button class="btn btn-outline-success btn-size center" data-toggle="modal" id="addButton" href="#">Add</button>
+      <div class="right"></div>
+      <div class="right"></div>
+      <form class="right right_form">
+        <select class="form-control mr-sm-2" type="text" id="sort_by" aria-label="Search" name ="">
+          <option >Sort Table By:</option>
+          <option value="First Name">First Name</option>
+          <option value="Last Name">Last Name</option>
+          <option value="Job Title">Job Title</option>
+          <option value="Email Address">Email Address</option>
+          <option value="Department ID">Department ID</option>
+        </select>
+      </form>
+      <form class="right right_forms">
+        <select class="form-control mr-sm-2" type="text" id="sort_order" aria-label="Search" > Sort Table By:
+          <option value="Ascending">Ascending</option>
+          <option value="Descending">Descending</option>
+        </select>
+      </form>
+    </nav>
   </div>
-
-    <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header modalColor">
-            <h5 class="modal-title" id="exampleModalLabel"><span id="countryName"></span></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true" class="modalColor">&times;</span>
-            </button>
-          </div>
-          <div class="form-signin">
-            <form>
-              <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
-              <!--<label for="inputEmail" class="visually-hidden">Email address</label>-->
-              <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-              <!--<label for="inputPassword" class="visually-hidden"></label>-->
-              <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-              <div class="checkbox mb-3">
-                <label>
-                  <input type="checkbox" value="remember-me"> Remember me
-                </label>
-                <br>
-                <a style="size: 0.3em" href="/forgottenPassword">Forgot password?</a>
-              </div>
-              <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-            </form>            
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" id="closeModal">Close</button>
+  
+  <main class="container">
+    <div class='margin p-3 bg-white rounded shadow-sm'>
+      <div class='d-flex text-muted pt-3'>
+        <table id="table" class="tablesorter table"  style="background-color: white;">
+          <thead>
+            <tr>
+              <th class="firstTd">
+                <input type='checkbox' class='checkbox'></th>
+              <th class="firstTd">ID</th>
+              <th class="secondTd">First Name</th>
+              <th class="secondTd">Last Name</th>
+              <th>Job Title</th>
+              <th class="thirdTd">Email Address</Address></th>
+              <th class="secondTd">Department ID</th>
+            </tr>
+          </thead>
+          <tbody id="employeeList">
+            
+          </tbody>
+        </table>
+      </div>
+    </div>
+  
+      <div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header modalColor">
+              <h5 class="modal-title" id="exampleModalLabel"><span id="countryName"></span></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" class="modalColor">&times;</span>
+              </button>
+            </div>
+            <div class="form-signin">
+              <form>
+                <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+                <!--<label for="inputEmail" class="visually-hidden">Email address</label>-->
+                <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+                <!--<label for="inputPassword" class="visually-hidden"></label>-->
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+                <div class="checkbox mb-3">
+                  <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                  </label>
+                  <br>
+                  <a style="size: 0.3em" href="/forgottenPassword">Forgot password?</a>
+                </div>
+                <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+              </form>            
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal" id="closeModal">Close</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
-    <div class="modal" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header modalColor">
-            <h5 class="modal-title" id="exampleModalLabel"><span id="editHeader">Add New Employee</span></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true" class="modalColor">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">      
-            <form class="form-horizontal" id="myForm" action="addPersonnel.php" method="POST">
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="firstName">First Name:</label>
-                <div class="col-sm-10">          
-                  <input type="text" class="form-control newForm" id="firstName" placeholder="Enter First Name" name="firstName">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="lastName">Last Name:</label>
-                <div class="col-sm-10">          
-                  <input type="text" class="form-control newForm" id="lastName" placeholder="Enter Last Name" name="lastName">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="jobTitle">Job Title:</label>
-                <div class="col-sm-10">          
-                  <input type="text" class="form-control newForm" id="jobTitle" placeholder="Enter Job Title" name="jobTitle">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="email">Email:</label>
-                <div class="col-sm-10">          
-                  <input type="email" class="form-control newForm" id="email" placeholder="Enter Email" name="email">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="departmentId" style="display:inline-block;">Department ID:</label>
-                <div class="col-sm-10">          
-                  <input type="text" class="form-control newForm" id="departmentId" placeholder="Enter Department ID" name="departmentId">
-                </div>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" id="closeModal2">Submit</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header modalColor">
-            <h5 class="modal-title" id="exampleModalLabel"><span id="editHeader">Edit Employee</span></h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true" class="modalColor">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-              <form class="form-horizontal" action="/action_page.php">
-                <div class="form-group">
-                  <label class="control-label col-sm-2" for="id">Id:</label>
-                  <div class="col-sm-10">
-                    
-                  </div>
-                </div>
+  
+      <div class="modal" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header modalColor">
+              <h5 class="modal-title" id="exampleModalLabel"><span id="editHeader">Add New Employee</span></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" class="modalColor">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">      
+              <form class="form-horizontal" method="POST">
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="firstName">First Name:</label>
                   <div class="col-sm-10">          
-                    
+                    <input type="text" class="form-control newForm" id="firstName" placeholder="Enter First Name" name="firstName">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="lastName">Last Name:</label>
                   <div class="col-sm-10">          
-                  
+                    <input type="text" class="form-control newForm" id="lastName" placeholder="Enter Last Name" name="lastName">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="jobTitle">Job Title:</label>
                   <div class="col-sm-10">          
-                  
+                    <input type="text" class="form-control newForm" id="jobTitle" placeholder="Enter Job Title" name="jobTitle">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="email">Email:</label>
                   <div class="col-sm-10">          
-                  
+                    <input type="email" class="form-control newForm" id="email" placeholder="Enter Email" name="email">
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="departmentId" style="display:inline-block;">Department ID:</label>
                   <div class="col-sm-10">          
-                  
+                    <input type="text" class="form-control newForm" id="departmentId" placeholder="Enter Department ID" name="departmentId">
                   </div>
                 </div>
               </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" id="closeModal3">Submit</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="modal" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-          <div class="modal-header modalColor">
-              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          </div>
-          <div class="modal-body">
-            <div>
-              <img src="images/cancel.svg" class="icon-box">
-            </div>						
-            <h4 class="modal-title w-100">Are you sure?</h4>	
-            <p class="gray">Do you really want to delete these records?<br>This process cannot be undone.</p>
-			    </div>
-			    <div class="modal-footer justify-content-center">
-				    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModal4">Cancel</button>
-				    <button type="button" class="btn btn-danger" id="confirmDeletion">Delete</button>  
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" id="btn_submit">Submit</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-
-</main>
-
+  
+      <div class="modal" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header modalColor">
+              <h5 class="modal-title" id="exampleModalLabel"><span id="editHeader">Edit Employee</span></h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true" class="modalColor">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form class="form-horizontal" method="POST">
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="firstName">First Name:</label>
+                  <div class="col-sm-10">          
+                    <input type="text" class="form-control newForm" id="firstName_update" placeholder="Enter First Name" name="firstName">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="lastName">Last Name:</label>
+                  <div class="col-sm-10">          
+                    <input type="text" class="form-control newForm" id="lastName_update" placeholder="Enter Last Name" name="lastName">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="jobTitle">Job Title:</label>
+                  <div class="col-sm-10">          
+                    <input type="text" class="form-control newForm" id="jobTitle_update" placeholder="Enter Job Title" name="jobTitle">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="email">Email:</label>
+                  <div class="col-sm-10">          
+                    <input type="email" class="form-control newForm" id="email_update" placeholder="Enter Email" name="email">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="departmentId" style="display:inline-block;">Department ID:</label>
+                  <div class="col-sm-10">          
+                    <input type="text" class="form-control newForm" id="departmentId_update" placeholder="Enter Department ID" name="departmentId">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_update">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="modal" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header modalColor">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div>
+                <img src="images/cancel.svg" class="icon-box">
+              </div>						
+              <h4 class="modal-title w-100">Are you sure?</h4>	
+              <p class="gray">Do you really want to delete these records?<br>This process cannot be undone.</p>
+            </div>
+            <div class="modal-footer justify-content-center">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeModal4">Cancel</button>
+              <button type="button" class="btn btn-danger" id="confirmDeletion">Delete</button>  
+            </div>
+          </div>
+        </div>
+      </div>
+  </main>
+</div>
     <script src="js/jquery-2.2.3.min.js"></script>
     <script src="vendors/Bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendors/Bootstrap/js/bootstrap.min.js"></script>
     <script src="vendors/Bootstrap/js/popper.min.js"></script>
     <script src="vendors/Bootstrap/js/offcanvas.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" ></script>
     <script src="js/script.js"></script>
-
   </body>
 </html>
+
