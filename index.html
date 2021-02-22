@@ -14,15 +14,12 @@
     <!-- Bootstrap core CSS -->
 
     <link href="vendors/Bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
     <link href="css/index.css" rel="stylesheet">
-
     <link href="vendors/Bootstrap/css/signin.css" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" /> 
-       
+        
     <!-- Custom styles for this template -->
-    
+
     <link href="vendors/Bootstrap/css/offcanvas.css" rel="stylesheet">
   </head>
   <body class="bg-light">
@@ -57,7 +54,14 @@
       <button class="btn btn-outline-success btn-size center" id="deleteButton" href="#">Delete</button>
       <button class="btn btn-outline-success btn-size center" data-toggle="modal" id="addButton" href="#">Add</button>
       <div class="right"></div>
-      <div class="right"></div>
+      <div class="right right_forma">
+          <select class="form-control mr-sm-2" type="text" id="table_selection" aria-label="Search" name ="">
+            <option>Select Table:</option>
+            <option value="Employee_table">Employees</option>
+            <option value="location_table">Locations</option>
+            <option value="Department_table">Departments</option>
+          </select>
+      </div>
       <form class="right right_form">
         <select class="form-control mr-sm-2" type="text" id="sort_by" aria-label="Search" name ="">
           <option >Sort Table By:</option>
@@ -78,8 +82,8 @@
   </div>
   
   <main class="container">
-    <div class='margin p-3 bg-white rounded shadow-sm'>
-      <div class='d-flex text-muted pt-3'>
+    <div class='margin bg-white rounded shadow-sm'>
+      <div class='d-flex text-muted'>
         <table id="table" class="tablesorter table"  style="background-color: white;">
           <thead>
             <tr>
