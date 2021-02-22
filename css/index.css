@@ -19,6 +19,7 @@
     float: left; 
     width: 10%;
     min-width: 80px;
+    border: 1px solid #ced4da;
 }
 
 .center{
@@ -28,6 +29,7 @@
     margin-top: 0.3%;
     margin-right: 0.3%;
     height: calc(1.5em + .75rem + 2px);
+    border: 1px solid #ced4da;
 }
 
 .right{
@@ -93,7 +95,19 @@ table {
 td {
     width: 15%;
     text-align: left;
-    line-height: 3rem;
+    border-top: 1px solid #d4d3d386;
+}
+
+.col-jobTitle {
+    min-width: 95px;
+}
+
+.col-departmentId {
+    min-width: 140px;
+}
+
+.table thead th {
+
     border-bottom: 1px solid #d4d3d386;
 }
 
@@ -213,7 +227,7 @@ h4 {
     .nav-scroller{
       overflow: auto;
       display: block;
-      width: 800px;
+      width: 820px; 
     }
     .main_container{
       overflow: auto;
@@ -221,6 +235,17 @@ h4 {
       width: 100%;
     }
     .right_form{
-      margin-left: -80px;
+      min-width: 100px;
+      /*margin-left: -80px;*/
+    }
+
+    .right_forma {
+      min-width: 120px;
+      margin-left: -120px;
+    }
+
+    .formWidth {
+      width: auto;
+      min-width: 200px;
     }
   }
