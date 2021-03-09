@@ -17,9 +17,8 @@
     <link href="css/index.css" rel="stylesheet">
     <link href="vendors/Bootstrap/css/signin.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" /> 
-        
+    
     <!-- Custom styles for this template -->
-
     <link href="vendors/Bootstrap/css/offcanvas.css" rel="stylesheet">
   </head>
   <body class="bg-light">
@@ -44,26 +43,26 @@
   </div>
 </nav>
 <div class="main_container">
-  <div class="nav-scroller bg-white shadow-sm">
+  <div class="nav-scroller bg-white shadow-sm" >
     <nav class="nav nav-underline navDiv" aria-label="Secondary navigation">
       <form class="d-flex formWidth">
         <input class="form-control me-2 search-position" type="search" id="search"  placeholder="Search Employee" aria-label="Search">
         <button class="btn btn-outline-success btn-size left" type="submit"><img id="loupeHeight" src="images/Loupe.svg"></button>
       </form>
-      <button class="btn btn-outline-success btn-size center" id="editButton" disabled href="#">Edit</button>
-      <button class="btn btn-outline-success btn-size center" id="deleteButton" href="#">Delete</button>
+      <!--<button class="btn btn-outline-success btn-size center" id="editButton" disabled href="#">Edit</button>
+      <button class="btn btn-outline-success btn-size center" id="deleteButton" href="#">Delete</button>-->
       <button class="btn btn-outline-success btn-size center" data-toggle="modal" id="addButton" href="#">Add</button>
       <div class="right"></div>
-      <div class="right right_forma">
-          <select class="form-control mr-sm-2" type="text" id="table_selection" aria-label="Search" name ="">
-            <option>Select Table:</option>
-            <option value="Employee_table">Employees</option>
-            <option value="location_table">Locations</option>
-            <option value="Department_table">Departments</option>
-          </select>
+      <div class="right right_form">
+        <select class="form-control mr-sm-2" type="text" id="table_selection" aria-label="Search" name ="">
+          <option>Select Table:</option>
+          <option value="Employee_table">Employees</option>
+          <option value="location_table">Locations</option>
+          <option value="Department_table">Departments</option>
+        </select>
       </div>
       <form class="right right_form">
-        <select class="form-control mr-sm-2" type="text" id="sort_by" aria-label="Search" name ="">
+        <select class="form-control mr-sm-2 employee_table" type="text" id="sort_by" aria-label="Search" name ="">
           <option >Sort Table By:</option>
           <option value="First Name">First Name</option>
           <option value="Last Name">Last Name</option>
@@ -71,9 +70,27 @@
           <option value="Email Address">Email Address</option>
           <option value="Department ID">Department ID</option>
         </select>
+        <select class="form-control mr-sm-2 location_table" type="text" id="location_by" aria-label="Search" name ="">
+          <option >Sort Table By:</option>
+          <option value="location Name">Name</option>
+        </select>
+        <select class="form-control mr-sm-2 department_table" type="text" id="department_by" aria-label="Search" name ="">
+          <option >Sort Table By:</option>
+          <option value="Department Name">Name</option>
+          <option value="location D Id">location id</option>
+        </select>
+
       </form>
       <form class="right right_forms">
-        <select class="form-control mr-sm-2" type="text" id="sort_order" aria-label="Search" > Sort Table By:
+        <select class="form-control mr-sm-2 employee_table" type="text" id="sort_order" aria-label="Search" > Sort Table By:
+          <option value="Ascending">Ascending</option>
+          <option value="Descending">Descending</option>
+        </select>
+        <select class="form-control mr-sm-2 location_table" type="text" id="sort_order_location" aria-label="Search" > Sort Table By:
+          <option value="Ascending">Ascending</option>
+          <option value="Descending">Descending</option>
+        </select>
+        <select class="form-control mr-sm-2 department_table" type="text" id="sort_order_department" aria-label="Search" > Sort Table By:
           <option value="Ascending">Ascending</option>
           <option value="Descending">Descending</option>
         </select>
@@ -82,19 +99,39 @@
   </div>
   
   <main class="container">
-    <div class='margin bg-white rounded shadow-sm'>
-      <div class='d-flex text-muted'>
-        <table id="table" class="tablesorter table"  style="background-color: white;">
+    <div class='margin bg-white rounded shadow-sm table_container'>
+      <div class='d-flex text-muted table-responsive'>
+        <table id="table" class="tablesorter table "  style="background-color: white;">
           <thead>
-            <tr>
-              <th class="firstTd">
-                <input type='checkbox' class='checkbox'></th>
-              <th class="firstTd">ID</th>
-              <th class="secondTd">First Name</th>
+            <tr class="employee_table">
+              <!--<th class="firstTd">
+              <input type='checkbox' class='checkbox'></th>-->
+              <th style="display:none" class="firstTd">ID</th>
+              <th class="secondTd col-firstName">First Name</th>
               <th class="secondTd">Last Name</th>
               <th>Job Title</th>
               <th class="thirdTd">Email Address</Address></th>
-              <th class="secondTd">Department ID</th>
+              <th class="secondTd">Location</th>
+              <th class="secondTd">Department</th>
+              <th class="">Edit</th>
+              <th class="col-delete">Delete</th>
+            </tr>
+            <tr class="location_table">
+              <!--<th class="firstTd">
+              <input type='checkbox' class='checkbox'></th>-->
+              <th class="firstTd">ID</th>
+              <th class="locationTd">Location</th>
+              <th class="">Edit</th>
+              <th class="">Delete</th>
+            </tr>
+            <tr class="department_table">
+              <!--<th class="firstTd">
+              <input type='checkbox' class='checkbox'></th>-->
+              <th class="firstTd">ID</th>
+              <th class="locationTd">Department</th>
+              <th class="locationTd">Location Id</th>
+              <th class="">Edit</th>
+              <th class="">Delete</th>
             </tr>
           </thead>
           <tbody id="employeeList">
@@ -141,13 +178,15 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
           <div class="modal-content">
             <div class="modal-header modalColor">
-              <h5 class="modal-title" id="exampleModalLabel"><span id="editHeader">Add New Employee</span></h5>
+              <h5 class="modal-title employee_table" id=""><span id="editHeader">Add New Employee</span></h5>
+              <h5 class="modal-title location_table" id=""><span id="editHeader">Add New location</span></h5>
+              <h5 class="modal-title department_table" id=""><span id="editHeader">Add New deparment</span></h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true" class="modalColor">&times;</span>
               </button>
             </div>
             <div class="modal-body">      
-              <form class="form-horizontal" method="POST">
+              <form class="form-horizontal employee_table" method="POST">
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="firstName">First Name:</label>
                   <div class="col-sm-10">          
@@ -173,15 +212,56 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-sm-2" for="departmentId" style="display:inline-block;">Department ID:</label>
+                  <label class="control-label col-sm-2" for="departmentId" style="display:inline-block;">Department:</label>
+                  <div class="col-sm-10">
+                    <select class="form-control newForm department_drop" type="text" id="departmentId" name="departmentId">
+                    </select>         
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="location" style="display:inline-block;">Location:</label>
+                  <div class="col-sm-10">
+                    <select class="form-control newForm location_drop" type="text " id="location" name="location">
+                    </select>  
+                  </div>
+                 
+                </div>
+              </form>
+              <form class="form-horizontal location_table" method="POST">
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="locationName">Location Name:</label>
                   <div class="col-sm-10">          
-                    <input type="text" class="form-control newForm" id="departmentId" placeholder="Enter Department ID" name="departmentId">
+                    <input type="text" class="form-control newForm" id="locationName" placeholder="Enter First Name" name="firstName">
                   </div>
                 </div>
               </form>
+              <form class="form-horizontal department_table" method="POST">
+                <div class="form-group">
+                  <div class=" col-sm-2">
+                    <label class="control-label" for="departmentName">Department Name:</label>
+                  </div>
+                  <div class="col-sm-10">          
+                    <input type="text" class="form-control newForm" id="departmentName" placeholder="Enter First Name" name="firstName">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class=" col-sm-2">
+                    <label class="control-label col-sm-2" for="locationid">Location Name</label>
+                  </div>
+                  
+                  <div class="col-sm-10">    
+                    <select class="location_drop form-control newForm" id="locationid">
+                    </select>      
+                  </div>
+                </div>
+              </form>
+
+
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" id="btn_submit">Submit</button>
+              <button type="button" class="btn btn-primary employee_table" id="btn_submit">Submit</button>
+              <button type="button" class="btn btn-primary location_table" id="btn_submit_location">Submit</button>
+              <button type="button" class="btn btn-primary department_table" id="btn_submit_department">Submit</button>
             </div>
           </div>
         </div>
@@ -191,13 +271,15 @@
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
           <div class="modal-content">
             <div class="modal-header modalColor">
-              <h5 class="modal-title" id="exampleModalLabel"><span id="editHeader">Edit Employee</span></h5>
+              <h5 class="modal-title employee_table" id="exampleModalLabel "><span id="editHeader">Edit Employee</span></h5>
+              <h5 class="modal-title location_table" id="exampleModalLabel"><span id="editHeader">Edit Location</span></h5>
+              <h5 class="modal-title department_table" id="exampleModalLabel"><span id="editHeader">Edit Department</span></h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true" class="modalColor">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <form class="form-horizontal" method="POST">
+              <form class="form-horizontal employee_table" method="POST">
                 <div class="form-group">
                   <label class="control-label col-sm-2" for="firstName">First Name:</label>
                   <div class="col-sm-10">          
@@ -223,12 +305,47 @@
                   </div>
                 </div>
                 <div class="form-group">
-                  <label class="control-label col-sm-2" for="departmentId" style="display:inline-block;">Department ID:</label>
+                  <label class="control-label col-sm-2" for="departmentId" style="display:inline-block;">Department:</label>
+                  <div class="col-sm-10">
+                    <select class="form-control newForm department_drop" id="departmentId_update" type="text" name="departmentId">
+                    </select>         
+                   </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="location" style="display:inline-block;">Location:</label>
+                  <div class="col-sm-10">
+                    <select class="form-control newForm location_drop" type="text " id="location_update_select" name="location">
+                      
+                    </select>  
+                  </div>
+               </div>
+              </form>
+              <form class="form-horizontal location_table" method="POST">
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="locationName">Location Name:</label>
                   <div class="col-sm-10">          
-                    <input type="text" class="form-control newForm" id="departmentId_update" placeholder="Enter Department ID" name="departmentId">
+                    <input type="text" class="form-control newForm" id="locationName_update" placeholder="Enter First Name" name="firstName">
                   </div>
                 </div>
               </form>
+              <form class="form-horizontal department_table" method="POST">
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="departmentName">Department Name:</label>
+                  <div class="col-sm-10">          
+                    <input type="text" class="form-control newForm" id="departmentName_update" placeholder="Enter First Name" name="firstName">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-sm-2" for="locationid">Location Id</label>
+                  <div class="col-sm-10">
+                    <select class="location_drop form-control newForm" id="locationid_update">
+                    </select>          
+                  </div>
+                </div>
+               
+              </form>
+
+
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_update">Submit</button>
@@ -257,8 +374,11 @@
           </div>
         </div>
       </div>
+  
   </main>
 </div>
+
+
     <script src="js/jquery-2.2.3.min.js"></script>
     <script src="vendors/Bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="vendors/Bootstrap/js/bootstrap.min.js"></script>
