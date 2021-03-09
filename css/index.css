@@ -19,7 +19,7 @@
     float: left; 
     width: 10%;
     min-width: 80px;
-    border: 1px solid #ced4da;
+    border: 1px solid #ced4da; 
 }
 
 .center{
@@ -29,7 +29,7 @@
     margin-top: 0.3%;
     margin-right: 0.3%;
     height: calc(1.5em + .75rem + 2px);
-    border: 1px solid #ced4da;
+    border: 1px solid #ced4da; 
 }
 
 .right{
@@ -95,20 +95,21 @@ table {
 td {
     width: 15%;
     text-align: left;
-    border-top: 1px solid #d4d3d386;
+    line-height: 3rem;
+    border-bottom: 1px solid #d4d3d386;
 }
 
 .col-jobTitle {
-    min-width: 95px;
+   min-width: 95px;
 }
 
 .col-departmentId {
-    min-width: 140px;
+   min-width: 140px;
 }
 
 .table thead th {
 
-    border-bottom: 1px solid #d4d3d386;
+   border-bottom: 1px solid #d4d3d386;
 }
 
 .firstTd {
@@ -227,7 +228,7 @@ h4 {
     .nav-scroller{
       overflow: auto;
       display: block;
-      width: 820px; 
+      width: 820px;
     }
     .main_container{
       overflow: auto;
@@ -236,16 +237,40 @@ h4 {
     }
     .right_form{
       min-width: 100px;
-      /*margin-left: -80px;*/
+      /*margin-left: 0px;*/
     }
-
     .right_forma {
-      min-width: 120px;
-      margin-left: -120px;
-    }
-
+     min-width: 120px;
+     margin-left: -120px;
+   }
     .formWidth {
-      width: auto;
-      min-width: 200px;
+     width: auto;
+     min-width: 200px;
+   }
+  }
+  .location_table,.department_table{
+    display: none;
+  }
+  .nav-scroller{
+    position: fixed !important;
+    width: 100%;
+    background-color: white;
+  }
+  .table_container{
+    padding-top: 45px;
+  }
+  
+  .table-responsive{
+      height:900px;  
+      overflow:auto;
+      overflow-x: auto;
     }
+thead tr:nth-child(1) th{
+background: white;
+position: sticky;
+top: 0;
+z-index: 10;
+}
+  .btn-size{
+    width: 40px;
   }
