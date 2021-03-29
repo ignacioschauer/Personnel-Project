@@ -68,7 +68,7 @@ var editid = "0";
       
       function deleteButton($delete_id){
         swal({
-            title: "Are you sure? Do you want to delete this information? ? ",
+            title: "Are you sure? Do you want to delete this information?",
             icon: "warning",
             buttons: true,
             dangerMode: true,
@@ -475,3 +475,135 @@ var editid = "0";
 
       clearInput();
   })
+
+  function fn10sec() {
+      
+    $.ajax({
+      url: "php/real_time.php",
+      dataType:"json", 
+      data:{get_dropdown_val:$('#table_selection').val()},
+      success: function(result){
+        console.log(result);
+        $(result).each(function(index){
+
+            if(result[index]['status'] == 1 || result[index]['status'] == 3){
+              // update
+              var id = result[index]['id'];
+              if($('#table_selection').val() == 'location_table'){
+
+                // status 3 = add 
+
+                if(result[index]['status'] == 3){
+                  
+                  $('#employeeList').prepend(`
+                      <tr id="tr_`+id+`">
+                        <td  style="display:none" class="col-location_id" id="location_id_`+id+`">`+id+`</td>
+                        <td class="col-locationName" id="locationName_`+id+`">`+ result[index]['name']+`</td>
+                        <td class="col-edit">
+                            <button class="btn btn-outline-success btn-size" onclick="editButton(`+id+`)" href="#"><img src="images/edit.svg" ></button>
+                        </td>
+                        <td class="col-edit">
+                            <button class="btn btn-outline-success btn-size" onclick="deleteButton(`+id+`)" href="#"><img src="images/trashBin.svg" ></button>
+                        </td>
+                    </tr>
+                  `);
+
+                }else{
+                  $('#locationName_'+id).text(result[index]['name']);
+                  if(editid == id){
+
+                    $('#locationName_update').val(result[index]['name']);
+
+                  }
+                }
+
+              }else if($('#table_selection').val() == 'Department_table'){
+                
+                if(result[index]['status'] == 3){
+
+                  $('#employeeList').prepend(`
+                      <tr id="tr_`+id+`">
+                        <td style="display:none" class="col-location-ids" id="location_id_`+id+`">`+ id +`</td>
+                        <td class="col-departmentName" id="departmentName_`+id+`">`+ result[index]['name']+`</td>
+                        <td class="col-locationD" id="locationD_ID_`+id+`">`+ result[index]['location_name']+`</td>
+                        <td class="col-edit">
+                            <button class="btn btn-outline-success btn-size" onclick="editButton(`+id+`)" href="#"><img src="images/edit.svg" ></button>
+                        </td>
+                        <td class="col-edit">
+                            <button class="btn btn-outline-success btn-size" onclick="deleteButton(`+id+`)" href="#"><img src="images/trashBin.svg" ></button>
+                        </td>
+                    </tr>
+                  `);
+                }else{
+
+                  $('#departmentName_'+id).text(result[index]['name']);
+                  $('#locationD_ID_'+id).text(result[index]['location_name']);
+
+                  if(editid == id){
+
+                    $('#departmentName_update').val(result[index]['name']);
+                    $("#locationid_update option:contains("+result[index]['location_name']+")").attr('selected', true);
+
+                  }
+                }
+
+              }
+              else{
+
+                if(result[index]['status'] == 3){
+                  $('#employeeList').prepend(`
+                      <tr id="tr_`+id+`">
+                        <td style="display:none" class="col-id" id="user_id_`+id+`">`+id+`</td>
+                        <td class="col-firstName" id="firstName_`+id+`">`+ result[index]['firstName']+`</td>
+                        <td class="col-lastName" id="lastName_`+id+`">`+ result[index]['lastName']+`</td>
+                        <td class="col-jobTitle d-none d-lg-table-cell d-sm-none" id="jobTitle_`+id+`">`+ result[index]['jobTitle']+`</td>
+                        <td class="col-email d-none d-lg-table-cell d-sm-none" id="email_`+id+`">`+ result[index]['email']+`</td>
+                        <td class="col-location" id="location_`+id+`">`+ result[index]['location']+`</td>
+                        <td class="col-departmentId" id="departmentId_`+id+`">`+ result[index]['department']+`</td>
+                        <td class="col-edit">
+                            <button class="btn btn-outline-success btn-size " onclick="editButton(`+id+`)" href="#" onclick=><img src="images/edit.svg" ></button>
+                        </td>
+                        <td class="col-delete">
+                            <button class="btn btn-outline-success btn-size" onclick="deleteButton(`+id+`)" href="#"><img src="images/trashBin.svg" ></button>
+                        </td>
+                    </tr>
+                  `);
+                }else{
+
+                  $('#firstName_'+id).text(result[index]['firstName']);
+                  $('#lastName_'+id).text(result[index]['lastName']);
+                  $('#jobTitle_'+id).text(result[index]['jobTitle']);
+                  $('#email_'+id).text(result[index]['email']);
+                  $('#location_'+id).text(result[index]['location']);
+                  $('#departmentId_'+id).text(result[index]['department']);
+
+                  if(editid == id){
+
+                    $('#firstName_update').val(result[index]['firstName']);
+                    $('#lastName_update').val(result[index]['lastName']);
+                    $('#jobTitle_update').val(result[index]['jobTitle']);
+                    $('#email_update').val(result[index]['email']);
+
+                    // $('.department_drop').html(result);
+                    $("#departmentId_update option:contains("+result[index]['department']+")").attr('selected', true);
+
+                    $('#location_update_select').empty();
+                    $('#location_update_select').append('<option >'+result[index]['location']+'</option>');
+                  }
+                  
+                }
+              }
+
+            }else if(result[index]['status'] == 2){
+              var delete_id = result[index]['id'];
+              $('#tr_'+delete_id).remove();
+            }
+
+        });
+
+    }});
+
+}
+fn10sec();
+setInterval(fn10sec, 2*1000);
+
